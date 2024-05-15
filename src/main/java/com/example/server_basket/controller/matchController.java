@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import com.example.server_basket.service.matchService;
 import org.springframework.ui.Model;
 
@@ -26,10 +23,9 @@ public class matchController {
     }
 
     @GetMapping("/getAll")
-    public String getAll(Model model) {
+    public List<matchEntity> getAll(Model model) {
         List<matchEntity> matches = matchService.getAll();
-        model.addAttribute("matches", matches);
-        return "index";
+        return matches;
     }
 
     @PostMapping("/addMatchPost")
@@ -40,6 +36,17 @@ public class matchController {
         } catch (Exception e) {
             return "redirect:/error";
         }
+    }
+
+    @PostMapping("/modifyMatchPost")
+    public String modifyMatch(@RequestParam("id") Long matchId,  inputMatchDto dto) {
+        try {
+            matchService.modifyMatch(String.valueOf(matchId), dto);
+            return "redirect:/dashboard";
+        } catch (Exception e) {
+            return "redirect:/error";
+        }
+
     }
 
     @GetMapping("/recoMatchFinish")
@@ -54,13 +61,4 @@ public class matchController {
 
     }
 
-    @PostMapping("/modifyMatch/{id}")
-    public ResponseEntity modifyMatch(@PathVariable String id, @RequestBody inputMatchDto dto){
-        if(!(matchService.exist(Integer.valueOf(id)))){
-            return new ResponseEntity("Le match n'existe pas", HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity(matchService.modifyMatch(id, dto), HttpStatus.OK);
-        }
-    }
 }

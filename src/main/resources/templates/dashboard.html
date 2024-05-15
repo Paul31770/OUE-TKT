@@ -3,7 +3,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="color-scheme" content="light dark"/>
+	<link rel="stylesheet" href="../static/css/dashboard.css"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+
 	<title>Hello world!</title>
 </head>
 <body>
@@ -21,6 +23,7 @@
 			<th>Equipe 1</th>
 			<th>Equipe 2</th>
 			<th>Statut</th>
+			<th>Modifier</th>
 		</tr>
 		<tr th:each="match : ${matches}">
 			<td th:text="${match.date}"></td>
@@ -28,6 +31,7 @@
 			<td th:text="${match.name_team1}"></td>
 			<td th:text="${match.name_team2}"></td>
 			<td th:text="${match.status}"></td>
+			<td><form th:action="@{/modifyMatch}" method="get"><input type="hidden" th:name="'id'" th:value="${match.ID}"/><input id="inputModifier" type="submit" value="Modifier"/></form></td>
 		</tr>
 	</table>
 	<form th:action="@{/addMatch}" method="get">

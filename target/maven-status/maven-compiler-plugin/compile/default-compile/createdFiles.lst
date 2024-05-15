@@ -1,7 +1,7 @@
-com\example\server_basket\ServerBasketApplication.class
-com\example\server_basket\repository\matchRepository.class
 com\example\server_basket\service\matchService.class
 com\example\server_basket\ServletInitializer.class
-com\example\server_basket\entity\matchEntity.class
 com\example\server_basket\dto\inputMatchDto.class
+com\example\server_basket\ServerBasketApplication.class
+com\example\server_basket\repository\matchRepository.class
+com\example\server_basket\entity\matchEntity.class
 com\example\server_basket\controller\matchController.class

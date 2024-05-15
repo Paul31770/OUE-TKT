@@ -63,8 +63,8 @@ public class matchService {
         return listMatchCurrent;
     }
 
-    public Integer modifyMatch(String id, inputMatchDto dto){
-        LocalDate date=LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    public void modifyMatch(String id, inputMatchDto dto){
+        LocalDate date = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         matchEntity entity= matchRepo.findById(Integer.valueOf(id)).get();
         entity.setName_team1(dto.getName_team1());
         entity.setName_team2(dto.getName_team2());
@@ -74,12 +74,15 @@ public class matchService {
         entity.setDate(date);
         entity.setLogo_team1(dto.getLogo_team1());
         entity.setLogo_team2(dto.getLogo_team2());
-
         matchRepo.save(entity);
-        return entity.getID();
     }
 
     public Boolean exist(Integer id) {
         return matchRepo.existsById(id);
+    }
+
+    public matchEntity findMatch(String id){
+        return matchRepo.findById(Integer.valueOf(id)).get();
+
     }
 }
