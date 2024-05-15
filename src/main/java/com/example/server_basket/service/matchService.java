@@ -18,9 +18,11 @@ public class matchService {
 
     public List<matchEntity> getAllMatchFinish(){
 
+        return null;
     }
 
     public  List<matchEntity> getAllMatchCurrent(){
 
+        return null;
     }
 }
