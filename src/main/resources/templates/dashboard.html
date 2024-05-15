@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light dark"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+	<title>Hello world!</title>
+</head>
+<body>
+<main class="container">
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Logout"/>
+	</form>
+	<h1>Dashboard</h1>
+
+	<h3>Matches</h3>
+	<table>
+		<tr>
+			<th>Date</th>
+			<th>Score</th>
+			<th>Equipe 1</th>
+			<th>Equipe 2</th>
+			<th>Statut</th>
+		</tr>
+		<tr th:each="match : ${matches}">
+			<td th:text="${match.date}"></td>
+			<td th:text="${match.score_team1} + ' - ' + ${match.score_team2}"></td>
+			<td th:text="${match.name_team1}"></td>
+			<td th:text="${match.name_team2}"></td>
+			<td th:text="${match.status}"></td>
+		</tr>
+	</table>
+	<form th:action="@{/addMatch}" method="get">
+		<input type="submit" value="Ajouter un match"/>
+	</form>
+</main>
+</body>
+</html>
