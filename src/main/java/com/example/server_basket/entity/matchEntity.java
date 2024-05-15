@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 
 @Entity
-@Table(name="match")
+@Table(name="matchDB")
 public class matchEntity {
 
     @Id

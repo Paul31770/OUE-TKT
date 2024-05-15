@@ -15,4 +15,12 @@ public class matchService {
     public List<matchEntity> getAll(){
         return matchRepo.findAll();
     }
+
+    public List<matchEntity> getAllMatchFinish(){
+
+    }
+
+    public  List<matchEntity> getAllMatchCurrent(){
+
+    }
 }
