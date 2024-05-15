@@ -42,18 +42,44 @@ public class matchService {
         List<matchEntity> listMatchFinish= new ArrayList<>();
         List<matchEntity> listAllMatch= matchRepo.findAll();
         for ( matchEntity match : listAllMatch){
-            Long betweenDate = ChronoUnit.DAYS.between(date,match.getDate());
-            if (!(betweenDate>= -7) || match.getStatus()=="terminé"){
+            Long betweenDate = ChronoUnit.DAYS.between(match.getDate(),date);
+            if (betweenDate<=7 && match.getStatus().equals("terminé")){
                 listMatchFinish.add(match);
             }
         }
-        System.out.println(listMatchFinish);
-
-        return null;
+        return listMatchFinish;
     }
 
     public  List<matchEntity> getAllMatchCurrent(){
+        LocalDate date= LocalDate.now();
+        List<matchEntity> listMatchCurrent= new ArrayList<>();
+        List<matchEntity> listAllMatch= matchRepo.findAll();
+        for ( matchEntity match : listAllMatch){
+            Long betweenDate = ChronoUnit.DAYS.between(match.getDate(),date);
+            if (betweenDate<=7 && match.getStatus().equals("en cour")){
+                listMatchCurrent.add(match);
+            }
+        }
+        return listMatchCurrent;
+    }
 
-        return null;
+    public Integer modifyMatch(String id, inputMatchDto dto){
+        LocalDate date=LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        matchEntity entity= matchRepo.findById(Integer.valueOf(id)).get();
+        entity.setName_team1(dto.getName_team1());
+        entity.setName_team2(dto.getName_team2());
+        entity.setScore_team1(dto.getScore_team1());
+        entity.setScore_team2(dto.getScore_team2());
+        entity.setStatus(dto.getStatus());
+        entity.setDate(date);
+        entity.setLogo_team1(dto.getLogo_team1());
+        entity.setLogo_team2(dto.getLogo_team2());
+
+        matchRepo.save(entity);
+        return entity.getID();
+    }
+
+    public Boolean exist(Integer id) {
+        return matchRepo.existsById(id);
     }
 }

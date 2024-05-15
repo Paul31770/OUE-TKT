@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.example.server_basket.service.matchService;
@@ -38,8 +39,24 @@ public class matchController {
     }
 
     @GetMapping("/recoMatchFinish")
-    public List<matchEntity> recoMatchFinish(){
+    public ResponseEntity recoMatchFinish(){
+        return new ResponseEntity(matchService.getAllMatchFinish(), HttpStatus.OK);
 
-        return matchService.getAllMatchFinish();
+    }
+
+    @GetMapping("/recoMatchCurrent")
+    public ResponseEntity recoMatchCurrent(){
+        return new ResponseEntity(matchService.getAllMatchCurrent(), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/modifyMatch/{id}")
+    public ResponseEntity modifyMatch(@PathVariable String id, @RequestBody inputMatchDto dto){
+        if(!(matchService.exist(Integer.valueOf(id)))){
+            return new ResponseEntity("Le match n'existe pas", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity(matchService.modifyMatch(id, dto), HttpStatus.OK);
+        }
     }
 }
