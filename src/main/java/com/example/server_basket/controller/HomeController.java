@@ -12,16 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.example.server_basket.service.matchService;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
-public class matchController {
+public class HomeController {
     @Autowired
     private matchService matchService;
 
-    @GetMapping("/hello")
-    public String hello() {
+    @GetMapping("/")
+    public String home() {
         return "index";
     }
 
@@ -32,26 +33,29 @@ public class matchController {
         return "index";
     }
 
-    @PostMapping("/addMatchPost")
+    @PostMapping("secured/addMatchPost")
     public String addMatch(inputMatchDto dto) {
         try {
             matchService.addMacth(dto);
-            return "redirect:/dashboard";
+            return "redirect:/secured/dashboard";
         } catch (Exception e) {
             return "redirect:/error";
         }
     }
 
-    @GetMapping("/recoMatchFinish")
-    public ResponseEntity recoMatchFinish(){
-        return new ResponseEntity(matchService.getAllMatchFinish(), HttpStatus.OK);
+    @GetMapping("/finishedMatches")
+    public String finishedMatches(RedirectAttributes ra){
+        List<matchEntity> matches = matchService.getAllMatchFinish();
+        ra.addFlashAttribute("matches", matches);
+        return "redirect:/";
 
     }
 
-    @GetMapping("/recoMatchCurrent")
-    public ResponseEntity recoMatchCurrent(){
-        return new ResponseEntity(matchService.getAllMatchCurrent(), HttpStatus.OK);
-
+    @GetMapping("/currentMatches")
+    public String currentMatches(RedirectAttributes ra){
+        List<matchEntity> matches = matchService.getAllMatchCurrent();
+        ra.addFlashAttribute("matches", matches);
+        return "redirect:/";
     }
 
     @PostMapping("/modifyMatch/{id}")

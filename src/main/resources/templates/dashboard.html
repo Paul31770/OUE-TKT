@@ -7,11 +7,9 @@
 	<title>Hello world!</title>
 </head>
 <body>
-<main class="container">
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Logout"/>
-	</form>
-	<h1>Dashboard</h1>
+<article>
+	<div th:replace="header :: header"></div>
+	<h2>Dashboard</h2>
 
 	<h3>Matches</h3>
 	<table>
@@ -30,9 +28,9 @@
 			<td th:text="${match.status}"></td>
 		</tr>
 	</table>
-	<form th:action="@{/addMatch}" method="get">
+	<form th:action="@{/secured/addMatch}" method="get">
 		<input type="submit" value="Ajouter un match"/>
 	</form>
-</main>
+</article>
 </body>
 </html>

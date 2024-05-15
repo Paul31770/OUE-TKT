@@ -20,14 +20,19 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
-                                .requestMatchers("/login/**", "/error", "/home").permitAll()
-                                .anyRequest().hasRole("ADMIN")
+                                .requestMatchers("/secured/**").hasRole("ADMIN")
+                                .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin((form) ->
                         form
                             .loginPage("/login")
                             .successForwardUrl("/login/success")
+                )
+                .logout((logout) ->
+                        logout
+                            .logoutUrl("/logout")
+                            .logoutSuccessUrl("/?logout")
                 );
         return http.build();
     }

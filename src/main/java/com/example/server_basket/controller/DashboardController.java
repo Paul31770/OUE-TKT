@@ -1,8 +1,8 @@
 package com.example.server_basket.controller;
 
 import com.example.server_basket.entity.matchEntity;
-import com.example.server_basket.service.matchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,16 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class pagesController {
+public class DashboardController {
 
     @Autowired
     private com.example.server_basket.service.matchService matchService;
 
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
-    @GetMapping("/dashboard")
+    @GetMapping("secured/dashboard")
     public String index(Model model){
         List<matchEntity> matches = matchService.getAll();
         model.addAttribute("matches", matches);
@@ -34,10 +30,10 @@ public class pagesController {
 
     @PostMapping("/login/success")
     public String success(){
-        return "redirect:/dashboard";
+        return "redirect:/secured/dashboard";
     }
 
-    @GetMapping("/addMatch")
+    @GetMapping("secured/addMatch")
     public String addMatch(){
         return "addMatch";
     }
