@@ -11,34 +11,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.example.server_basket.service.matchService;
 import org.springframework.ui.Model;
+
 import java.util.List;
 
 @Controller
 public class matchController {
     @Autowired
     private matchService matchService;
+
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return "index";
     }
 
     @GetMapping("/getAll")
-    public String getAll(Model model){
-        /*return matchService.getAll();*/
+    public String getAll(Model model) {
         List<matchEntity> matches = matchService.getAll();
-        System.out.println(matches);
         model.addAttribute("matches", matches);
         return "index";
     }
 
-    @PostMapping("/addMatch")
-    public ResponseEntity addMatch(@RequestBody inputMatchDto dto){
-        return new ResponseEntity(matchService.addMacth(dto), HttpStatus.OK);
-
+    @PostMapping("/addMatchPost")
+    public String addMatch(inputMatchDto dto) {
+        try {
+            matchService.addMacth(dto);
+            return "redirect:/dashboard";
+        } catch (Exception e) {
+            return "redirect:/error";
+        }
     }
 
     @GetMapping("/recoMatchFinish")
-    public List<matchEntity> recoMatchFinish(){
+    public List<matchEntity> recoMatchFinish() {
 
         return matchService.getAllMatchFinish();
     }

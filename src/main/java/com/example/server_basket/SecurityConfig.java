@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .formLogin((form) ->
                         form
                             .loginPage("/login")
-                            .successForwardUrl("/dashboard")
+                            .successForwardUrl("/successLogin")
                 );
         return http.build();
     }

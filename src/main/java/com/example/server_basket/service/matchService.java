@@ -22,7 +22,7 @@ public class matchService {
     }
 
     public Integer addMacth(inputMatchDto dto){
-        LocalDate date= LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate date = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         matchEntity match= new matchEntity();
         match.setName_team1(dto.getName_team1());
         match.setName_team2(dto.getName_team2());
