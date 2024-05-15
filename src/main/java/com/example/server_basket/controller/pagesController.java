@@ -16,6 +16,10 @@ public class pagesController {
     @Autowired
     private com.example.server_basket.service.matchService matchService;
 
+    @GetMapping("/")
+    public String index(){
+        return "index";
+    }
     @GetMapping("/dashboard")
     public String index(Model model){
         List<matchEntity> matches = matchService.getAll();
@@ -28,8 +32,8 @@ public class pagesController {
         return "login";
     }
 
-    @PostMapping("/successLogin")
-    public String successLogin(){
+    @PostMapping("/login/success")
+    public String success(){
         return "redirect:/dashboard";
     }
 

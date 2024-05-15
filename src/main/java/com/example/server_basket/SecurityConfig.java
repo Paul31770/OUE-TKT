@@ -20,14 +20,14 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
-                                .requestMatchers("/dashboard").hasRole("ADMIN")
-                                .anyRequest().permitAll()
+                                .requestMatchers("/login/**", "/error", "/home").permitAll()
+                                .anyRequest().hasRole("ADMIN")
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin((form) ->
                         form
                             .loginPage("/login")
-                            .successForwardUrl("/successLogin")
+                            .successForwardUrl("/login/success")
                 );
         return http.build();
     }
