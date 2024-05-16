@@ -43,7 +43,7 @@ public class matchService {
         List<matchEntity> listAllMatch= matchRepo.findAll();
         for ( matchEntity match : listAllMatch){
             Long betweenDate = ChronoUnit.DAYS.between(match.getDate(),date);
-            if (betweenDate<=7 && match.getStatus().equals("terminé")){
+            if (betweenDate<=7 && match.getStatus().equals("Terminé")){
                 listMatchFinish.add(match);
             }
         }
@@ -56,7 +56,7 @@ public class matchService {
         List<matchEntity> listAllMatch= matchRepo.findAll();
         for ( matchEntity match : listAllMatch){
             Long betweenDate = ChronoUnit.DAYS.between(match.getDate(),date);
-            if (betweenDate<=7 && match.getStatus().equals("en cour")){
+            if (betweenDate<=7 && match.getStatus().equals("En cours")){
                 listMatchCurrent.add(match);
             }
         }

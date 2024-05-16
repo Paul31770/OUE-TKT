@@ -1,11 +1,41 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light dark"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+	<title>Dashbord</title>
 </head>
 <body>
-<p>test</p>
+	<article>
+		<div th:replace="header :: header"></div>
+		<article th:each="match : ${matches}">
+			<header>
+				<nav>
+					<ul>
+						<li><img style="height: 100px; width: 100px" th:src="${match.logo_team1}" alt="Logo de l'équipe 1"/></li>
+					</ul>
+					<ul>
+						<li><h2 th:text="${match.name_team1} + ' - ' + ${match.name_team2}"></h2></li>
+					</ul>
+					<ul>
+						<li><img style="height: 100px; width: 100px" th:src="${match.logo_team2}" alt="Logo de l'équipe 2"/></li>
+					</ul>
+				</nav>
+			</header>
+			<!--		<h3 th:text="${match.score_team1} + ' - ' + ${match.score_team2}"></h3>-->
+			<nav>
+				<ul>
+					<li><h3 th:text="${match.score_team1}"></h3></li>
+				</ul>
+				<ul>
+					<li><h2>-</h2></li>
+				</ul>
+				<ul>
+					<li><h3 th:text="${match.score_team2}"></h3></li>
+				</ul>
+			</nav>
+		</article>
+	</article>
 </body>
 </html>
