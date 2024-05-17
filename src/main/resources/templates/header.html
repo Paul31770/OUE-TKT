@@ -1,15 +1,14 @@
 <header>
 	<nav>
 		<ul>
-			<!--<li><h1>Les fans de matchs</h1></li>-->
 			<div th:if="${param.logout}">Vous avez été déconnecté.</div>
 		</ul>
 		<ul>
 			<li>
-				<a href="/currentMatches">Matchs en cours</a>
+				<strong><a href="/currentMatches">Matchs en cours</a></strong>
 			</li>
 			<li>
-				<a href="/finishedMatches">Matchs terminés</a>
+				<strong><a href="/finishedMatches">Matchs terminés</a></strong>
 			</li>
 			<li>
 				<form th:if="${#authorization.expression('!hasRole(''ADMIN'')')}" th:action="@{/login}" method="get">
@@ -33,3 +32,4 @@
 		</ul>
 	</nav>
 </header>
+
