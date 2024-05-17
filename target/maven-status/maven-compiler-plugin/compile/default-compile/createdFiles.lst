@@ -1,3 +1,4 @@
+com\example\server_basket\SecurityConfig.class
 com\example\server_basket\service\matchService.class
 com\example\server_basket\controller\HomeController.class
 com\example\server_basket\ServletInitializer.class
