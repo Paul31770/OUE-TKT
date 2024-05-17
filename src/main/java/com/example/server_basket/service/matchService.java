@@ -18,7 +18,7 @@ public class matchService {
     private matchRepository matchRepo;
 
     public List<matchEntity> getAll(){
-        return matchRepo.findAll();
+        return matchRepo.findAllByOrderByDateDesc();
     }
 
     public Integer addMacth(inputMatchDto dto){
@@ -40,7 +40,7 @@ public class matchService {
     public List<matchEntity> getAllMatchFinish(){
         LocalDate date= LocalDate.now();
         List<matchEntity> listMatchFinish= new ArrayList<>();
-        List<matchEntity> listAllMatch= matchRepo.findAll();
+        List<matchEntity> listAllMatch= matchRepo.findAllByOrderByDateDesc();
         for ( matchEntity match : listAllMatch){
             Long betweenDate = ChronoUnit.DAYS.between(match.getDate(),date);
             if (betweenDate<=7 && match.getStatus().equals("Terminé")){
@@ -53,7 +53,7 @@ public class matchService {
     public  List<matchEntity> getAllMatchCurrent(){
         LocalDate date= LocalDate.now();
         List<matchEntity> listMatchCurrent= new ArrayList<>();
-        List<matchEntity> listAllMatch= matchRepo.findAll();
+        List<matchEntity> listAllMatch= matchRepo.findAllByOrderByDateDesc();
         for ( matchEntity match : listAllMatch){
             Long betweenDate = ChronoUnit.DAYS.between(match.getDate(),date);
             if (betweenDate<=7 && match.getStatus().equals("En cours")){
@@ -83,6 +83,11 @@ public class matchService {
 
     public matchEntity findMatch(String id){
         return matchRepo.findById(Integer.valueOf(id)).get();
+
+    }
+
+    public void deleteMatch(String id){
+        matchRepo.deleteById(Integer.valueOf(id));
 
     }
 }

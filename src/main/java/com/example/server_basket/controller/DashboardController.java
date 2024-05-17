@@ -1,7 +1,10 @@
 package com.example.server_basket.controller;
 
 import com.example.server_basket.entity.matchEntity;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,5 +49,11 @@ public class DashboardController {
         matchEntity match=matchService.findMatch(String.valueOf(matchId));
         model.addAttribute("match", match);
         return "modifyMatch";
+    }
+
+    @GetMapping("secured/supprMatch")
+    public String supprMatch(@RequestParam("id") Long matchId){
+        matchService.deleteMatch(String.valueOf(matchId));
+        return "redirect:/secured/dashboard";
     }
 }

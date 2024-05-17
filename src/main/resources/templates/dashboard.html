@@ -23,6 +23,7 @@
 			<th>Equipe 2</th>
 			<th>Statut</th>
 			<th></th>
+			<th></th>
 		</tr>
 		<tr th:each="match : ${matches}">
 			<td th:text="${match.date}"></td>
@@ -30,7 +31,8 @@
 			<td th:text="${match.name_team1}"></td>
 			<td th:text="${match.name_team2}"></td>
 			<td th:text="${match.status}"></td>
-			<td><form th:action="@{/secured/modifyMatch}" method="get"><input type="hidden" th:name="'id'" th:value="${match.ID}"/><input  id="inputModifier" type="submit" value="Modifier"/></form></td>
+			<td><form th:action="@{/secured/modifyMatch}" method="get"><input type="hidden" th:name="'id'" th:value="${match.ID}"/><input  type="submit" value="Modifier"/></form></td>
+			<td><form th:action="@{/secured/supprMatch}" method="get"><input type="hidden" th:name="'id'" th:value="${match.ID}"/><input style="background-color: rgba(255,0,0,0.5); border-color: rgba(255,0,0,0.5)" type="submit" value="Supprimer"/></form></td>
 		</tr>
 	</table>
 
