@@ -42,58 +42,20 @@
 			</select>
 		</label>
 		<br>
+		<label>
+			Logo de l'équipe 1 :
+			<input type="text" name="logo_team1" required>
+		</label>
+		<label>
+			Logo de l'équipe 2 :
+			<input type="text" name="logo_team2" required>
+		</label>
+		<br>
 		<footer>
 			<button type="submit">Ajouter</button>
 		</footer>
 	</form>
-	<article>
-		<header>
-			<h1>Ajouter un match</h1>
-		</header>
-		<form th:action="@{/addMatchPost}" method="post">
-			<label>
-				Date:
-				<input type="date" name="date" required>
-			</label>
-			<br>
-			<label>
-				Score:
-				<input type="text" name="score_team1" placeholder="Equipe 1" required>
-				<input type="text" name="score_team2" placeholder="Equipe 2" required>
-			</label>
-			<br>
-			<label>
-				Nom de l'équipe 1 :
-				<input type="text" name="name_team1" required>
-			</label>
-			<br>
-			<label>
-				Nom de l'équipe 2 :
-				<input type="text" name="name_team2" required>
-			</label>
-			<br>
-			<label>
-				Statut:
-				<select name="status" aria-label="Select" required>
-					<option selected disabled value="">...</option>
-					<option>En cours</option>
-					<option>Terminé</option>
-				</select>
-			</label>
-			<label>
-				Logo de l'équipe 1 :
-				<input type="text" name="logo_team1" required>
-			</label>
-			<label>
-				Logo de l'équipe 2 :
-				<input type="text" name="logo_team2" required>
-			</label>
-			<br>
-			<footer>
-				<button type="submit">Ajouter</button>
-			</footer>
-		</form>
-	</article>
+
 </main>
 
 </article>
